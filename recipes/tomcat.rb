@@ -35,10 +35,10 @@ end
 
 # $ sudo tar xvf apache-tomcat-8*tar.gz -C /opt/tomcat --strip-components=1
 # ```
-# extract tar to /opt/tomcat. could import tar cookbook but didn't. 
+# extract tar to /opt/tomcat. could import tar cookbook but didn't.
 execute 'extract_tomcat_tar' do
-  command 'tar xvf /tmp/apache-tomcat-8.5.20.tar.gz'
-  cwd '/opt/tomcat'
+  command 'tar xvf /tmp/apache-tomcat-8.5.20.tar.gz -C /opt/tomcat --strip-components=1'
+  cwd '/opt/tomcat/'
 end
 
 #
