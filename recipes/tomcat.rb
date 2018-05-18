@@ -33,7 +33,7 @@ end
 # $ wget http://apache.cs.utah.edu/tomcat/tomcat-8/v8.5.20/bin/apache-tomcat-8.5.20.tar.gz
 # ```
 
-remote_file '/tmp' do
+remote_file '/tmp/apache-tomcat-8.5.20.tar.gz' do
   source 'http://apache.cs.utah.edu/tomcat/tomcat-8/v8.5.20/bin/apache-tomcat-8.5.20.tar.gz'
   owner 'tomcat'
   group 'tomcat'
