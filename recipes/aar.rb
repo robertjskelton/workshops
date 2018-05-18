@@ -1,6 +1,6 @@
 ##########################################################################
-# Cookbook Name:: aar
 # Recipe:: aar
+# README mentions that it runs on ubunutu, so didnt start. 
 #
 # Not sure how to get started?
 #
