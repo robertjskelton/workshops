@@ -2,11 +2,9 @@
 
 * ssh in (local instructions for Macbook Air)
   * cd ~/Downloads/SSH
-  * ssh ec2-user@54.164.246.151 -i MyEc2KeyPair.pem
+  * ssh ubuntu@54.164.246.151 -i MyEc2KeyPair.pem
 
 * sudo su -
-
-* yum install -y git
 
 * mkdir ~/cookbooks
 
@@ -16,7 +14,9 @@
 
 * curl -L https://omnitruck.chef.io/install.sh | sudo bash
 
-* chef-client -o ‘recipe[workshops::aar]’
+* apt-get update
+
+* chef-client -z -o recipe[workshops::aar]
 
 
 * note that port 8080 must be open in your ec2 SG to view the status page

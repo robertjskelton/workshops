@@ -2,7 +2,7 @@
 
 # The following script assumes that apache2, mysql, and unzip have been installed.
 package 'apache2'
-package 'mysql'
+package 'mysql-server'
 package 'unzip'
 
 # 1. wget https://github.com/colincam/Awesome-Appliance-Repair/archive/master.zip
