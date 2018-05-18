@@ -15,9 +15,9 @@ end
 # 2. unzip master.zip
 # 3. cd into Awesome-Appliance-Repair
 # 4. sudo mv AAR to /var/www/
-execute 'extract_tomcat_tar' do
-  command 'tar xvf /tmp/master.zip -C /var/www --strip-components=1'
-  cwd '/opt/tomcat/'
+execute 'extract_aar_zip' do
+  command 'unzip /tmp/master.zip'
+  cwd '/var/www/'
 end
 
 # 5. sudo su root
