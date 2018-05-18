@@ -1,7 +1,7 @@
-* launch ec2 instance
+* launch a RHEL ec2 instance
 
-* ssh in
-  * cd ~/Downloads/ssh
+* ssh in (local instructions for Macbook Air)
+  * cd ~/Downloads/SSH
   * ssh ec2-user@54.164.246.151 -i MyEc2KeyPair.pem
 
 * sudo su -
