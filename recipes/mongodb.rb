@@ -42,7 +42,7 @@ package 'mongodb-org'
 #
 # sudo service mongod start
 service 'mongodb-org' do
-  action [:enable, :start]
+  action [:enable, :startcd]
 end
 # ensure that MongoDB will start following a system reboot by issuing the following command:
 #
