@@ -17,14 +17,12 @@
 #
 # If you are running a 64-bit system, use the following configuration:
 #
-yum_repository 'mondoDB_repo'
-do
-  [mongodb]
-  name=MongoDB Repository
-  baseurl=http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/
-  gpgcheck=0
-  enabled=1
+yum_repository 'mondoDB_repo' do
+  description 'MongoDB Repository'
+  baseurl 'http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/'
+  gpgcheck false
 end
+
 # If you are running a 32-bit system, which is not recommended for production deployments, use the following configuration:
 #
 # [mongodb]
