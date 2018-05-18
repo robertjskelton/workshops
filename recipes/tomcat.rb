@@ -41,9 +41,6 @@ execute 'extract_tomcat_tar' do
   cwd '/opt/tomcat/'
 end
 
-#
-# Update the Permissions
-#
 # update permissions, running this in bash because lots of commands
 bash 'update_permissions' do
   cwd ::File.dirname('/tmp')
@@ -54,16 +51,6 @@ bash 'update_permissions' do
       sudo chown -R tomcat /opt/tomcat/webapps/ /opt/tomcat/work/ /opt/tomcat/temp/ /opt/tomcat/logs/
     EOH
 end
-
-# $ sudo chgrp -R tomcat /opt/tomcat
-# $ sudo chmod -R g+r conf
-# $ sudo chmod g+x conf
-# $ sudo chown -R tomcat webapps/ work/ temp/ logs/
-# ```
-#
-# Install the Systemd Unit File
-#
-# ```
 
 # move files/tomcat.service into place
 cookbook_file '/etc/systemd/system/tomcat.service' do
@@ -78,14 +65,16 @@ end
 #
 # ```
 # $ sudo systemctl daemon-reload
-# ```
-#
+bash 'reload_tomcat' do
+  cwd ::File.dirname('/tmp')
+  code <<-EOH
+      systemctl daemon-reload
+    EOH
+end
 # Ensure `tomcat` is started and enabled
-#
-# ```
-# $ sudo systemctl start tomcat
-# $ sudo systemctl enable tomcat
-# ```
+service 'tomcat' do
+  action [:enable, :start]
+end
 #
 # Verify that Tomcat is running by visiting the site
 #

@@ -1,22 +1,7 @@
-##########################################################################
-# Cookbook Name:: mongodb
-# Recipe:: install
-#
-# Not sure how to get started?
-#
-# You could:
-# 1.  copy the relevant commands from http://docs.mongodb.org/manual/tutorial/install-mongodb-on-red-hat-centos-or-fedora-linux/
-# 2.  comment out everything
-# 3.  add the Chef resources and other Chef code necessary
-#
-# This file is an example of steps 1 and 2 above.
-##########################################################################
-#
+# recipe: MongoDB
+# installs 64 bit mongodb, ignores 32 bit
 
-# Create a /etc/yum.repos.d/mongodb.repo file to hold the following configuration information for the MongoDB repository:
-#
-# If you are running a 64-bit system, use the following configuration:
-#
+# 64 bit mongo repo
 yum_repository 'mondoDB_repo' do
   description 'MongoDB Repository'
   baseurl 'http://downloads-distro.mongodb.org/repo/redhat/os/x86_64/'
@@ -32,16 +17,11 @@ end
 # enabled=1
 #
 # Install the MongoDB packages and associated tools.
-#
-# sudo yum install mongodb-org
 package 'mongodb-org'
 #
 # Start MongoDB.
-#
-# sudo service mongod start
 service 'mongod' do
   action [:enable, :start]
 end
 # ensure that MongoDB will start following a system reboot by issuing the following command:
-#
 # sudo chkconfig mongod on#
