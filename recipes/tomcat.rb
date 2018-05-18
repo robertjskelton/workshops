@@ -5,14 +5,25 @@
 # ```shell
 # $ sudo yum install java-1.7.0-openjdk-devel
 # ```
+package 'java-1.7.0-openjdk-devel'
+
 #
 # Create a user for tomcat
 #
 # ```
 # $ sudo groupadd tomcat
 # $ sudo useradd -M -s /bin/nologin -g tomcat -d /opt/tomcat tomcat
-# ```
-#
+# ``
+user 'tomcat' do
+  comment 'tomcat user'
+  home '/opt/tomcat'
+end
+
+group 'tomcat' do
+  action :modify
+  members 'tomcat'
+end
+
 # Download the Tomcat Binary
 #
 # > NOTE: A specific binary will be mentioned below but it will likely be out of date. You can find the binaries for Tomcat 8 here at https://archive.apache.org/dist/tomcat/tomcat-8/
@@ -21,11 +32,26 @@
 # $ cd /tmp
 # $ wget http://apache.cs.utah.edu/tomcat/tomcat-8/v8.5.20/bin/apache-tomcat-8.5.20.tar.gz
 # ```
-#
+
+remote_file '/tmp' do
+  source 'http://apache.cs.utah.edu/tomcat/tomcat-8/v8.5.20/bin/apache-tomcat-8.5.20.tar.gz'
+  owner 'tomcat'
+  group 'tomcat'
+  mode '0755'
+  action :create
+end
+
+
 # Extract the Tomcat Binary
 #
 # ```
 # $ sudo mkdir /opt/tomcat
+directory '/opt/tomcat' do
+  owner 'tomcat'
+  group 'tomcat'
+  mode '0755'
+  action :create
+end
 # $ sudo tar xvf apache-tomcat-8*tar.gz -C /opt/tomcat --strip-components=1
 # ```
 #
