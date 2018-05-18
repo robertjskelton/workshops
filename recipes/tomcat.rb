@@ -24,7 +24,6 @@ remote_file '/tmp/apache-tomcat-8.5.20.tar.gz' do
   action :create
 end
 
-
 # create tomcat home directory
 directory '/opt/tomcat' do
   owner 'tomcat'
@@ -33,8 +32,6 @@ directory '/opt/tomcat' do
   action :create
 end
 
-# $ sudo tar xvf apache-tomcat-8*tar.gz -C /opt/tomcat --strip-components=1
-# ```
 # extract tar to /opt/tomcat. could import tar cookbook but didn't.
 execute 'extract_tomcat_tar' do
   command 'tar xvf /tmp/apache-tomcat-8.5.20.tar.gz -C /opt/tomcat --strip-components=1'
@@ -61,23 +58,15 @@ cookbook_file '/etc/systemd/system/tomcat.service' do
   action :create
 end
 
-# Reload Systemd to load the Tomcat Unit file
-#
-# ```
-# $ sudo systemctl daemon-reload
+# Reload Systemd to load the Tomcat Unit file, also doing this in bash
 bash 'reload_tomcat' do
   cwd ::File.dirname('/tmp')
   code <<-EOH
       systemctl daemon-reload
     EOH
 end
+
 # Ensure `tomcat` is started and enabled
 service 'tomcat' do
   action [:enable, :start]
 end
-#
-# Verify that Tomcat is running by visiting the site
-#
-# ```
-# $ curl http://localhost:8080
-# ```
