@@ -34,7 +34,7 @@ end
 # ```
 
 remote_file '/tmp/apache-tomcat-8.5.20.tar.gz' do
-  source 'http://apache.cs.utah.edu/tomcat/tomcat-8/v8.5.20/bin/apache-tomcat-8.5.20.tar.gz'
+  source 'https://archive.apache.org/dist/tomcat/tomcat-8/v8.0.52/bin/apache-tomcat-8.0.52.tar.gz'
   owner 'tomcat'
   group 'tomcat'
   mode '0755'
