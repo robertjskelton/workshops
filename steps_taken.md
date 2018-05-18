@@ -6,3 +6,4 @@ mkdir cookbooks
 cd cookbooks
 git clone https://github.com/robertjskelton/workshops.git
 curl -L https://omnitruck.chef.io/install.sh | sudo bash
+chef-client -z -o workshops
