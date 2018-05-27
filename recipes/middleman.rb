@@ -23,7 +23,7 @@
 # # Update apt-get
 #
 # apt-get update
-#
+apt_update
 # # Build Ruby
 #
 # apt-get install build-essential libssl-dev libyaml-dev libreadline-dev openssl curl git-core zlib1g-dev bison libxml2-dev libxslt1-dev libcurl4-openssl-dev nodejs libsqlite3-dev sqlite3
@@ -44,9 +44,9 @@
 # # cp /usr/local/bin/gem /usr/bin/gem
 #
 # # Install apache
-#
 # apt-get install apache2
-#
+package 'httpd'
+
 # # Configure apache
 #
 # a2enmod proxy_http
@@ -59,9 +59,9 @@
 # service apache2 restart
 #
 # # Install Git
-#
 # apt-get install git
-#
+package 'git'
+
 # # Clone the repo
 #
 # git clone https://github.com/learnchef/middleman-blog.git

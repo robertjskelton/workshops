@@ -18,5 +18,6 @@
 
 * chef-client -z -o recipe[workshops::aar]
 
+* chef-client -z -o recipe[workshops::middleman]
 
 * note that port 8080 must be open in your ec2 SG to view the status page
