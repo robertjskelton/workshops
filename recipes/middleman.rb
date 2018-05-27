@@ -1,33 +1,32 @@
-# # Installing Middleman
-#
-# ## High-Level Instructions
-#
-# * Update apt-get
-# * Install Ruby
-# * Install apache
-# * Configure apache
-# * Restart apache
-# * Install git
-# * Clone the repo
-# * Install Bundler
-# * Install project dependencies
-# * Install thin service
-# * Create a new thin config for the blog and copy into /etc/thin
-# * Fix the /etc/init.d/thin script to incude HOME variable
-# * Start / Re-start the thin service
-#
-#
+# recipe: middleman
+# Runs on Ubuntu
+# Robert Skelton
+
 # ## Installation Commands
-#
-# ```
 # # Update apt-get
-#
 # apt-get update
 apt_update
-# # Build Ruby
-#
+
 # apt-get install build-essential libssl-dev libyaml-dev libreadline-dev openssl curl git-core zlib1g-dev bison libxml2-dev libxslt1-dev libcurl4-openssl-dev nodejs libsqlite3-dev sqlite3
-#
+package %w(build-essential libssl-dev libyaml-dev libreadline-dev openssl curl git-core zlib1g-dev bison libxml2-dev libxslt1-dev libcurl4-openssl-dev nodejs libsqlite3-dev sqlite3)
+
+# # Build Ruby
+bash 'ruby' do
+  cwd ::File.dirname('/tmp')
+  code <<-EOH
+    mkdir ~/ruby
+    cd ~/ruby
+    wget http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.3.tar.gz
+    tar -xzf ruby-2.1.3.tar.gz
+    cd ruby-2.1.3
+    ./configure
+    make install
+    rm -rf ~/ruby
+    cp /usr/local/bin/ruby /usr/bin/ruby
+    cp /usr/local/bin/gem /usr/bin/gem
+    EOH
+end
+
 # mkdir ~/ruby
 # cd ~/ruby
 # wget http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.3.tar.gz
@@ -45,7 +44,7 @@ apt_update
 #
 # # Install apache
 # apt-get install apache2
-package 'httpd'
+package 'apache2'
 
 # # Configure apache
 #
