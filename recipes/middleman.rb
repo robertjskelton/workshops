@@ -22,6 +22,7 @@ package %w(build-essential libssl-dev libyaml-dev libreadline-dev openssl curl g
 #   rm -rf ~/ruby
 #   cp /usr/local/bin/ruby /usr/bin/ruby
 #   cp /usr/local/bin/gem /usr/bin/gem
+#   chmod 777 -R /usr/local/lib/
 #   EOH
 # end
 
@@ -102,15 +103,17 @@ end
 
 # cd middleman-blog
 # gem install bundler
-bash 'install_bundler_as_ubuntu_one_bash' do
-  user 'ubuntu'
-  cwd ::File.dirname('/tmp/middleman-blog')
-  code <<-EOH
-  gem install bundler
-  bundle install
-  EOH
-end
-#
+# bash 'install_bundler_as_ubuntu_one_bash' do
+#   user 'ubuntu'
+#   cwd ::File.dirname('/tmp/middleman-blog')
+#   code <<-EOH
+#   gem install bundler
+#   bundle install
+#   EOH
+# end
+
+gem_package 'bundler'
+
 # bash 'bundle_install_as_robert' do
 #   user 'robert'
 #   cwd ::File.dirname('/tmp/middleman-blog')
