@@ -60,7 +60,7 @@ package 'git'
 git '/tmp' do
   repository 'https://github.com/learnchef/middleman-blog.git'
   revision 'master'
-  action :sync
+  action :checkout
 end
 
 # cd middleman-blog
@@ -72,7 +72,6 @@ bash 'install_bundler' do
   EOH
 end
 
-
 # # Install project dependencies
 #
 # bundle install
@@ -81,7 +80,7 @@ end
 user 'robert' do
   comment 'Robert User'
   uid '1234'
-  home '/home/robert'
+  home '/tmp'
   shell '/bin/bash'
   password 'CorrectHorse_BatterySt@pl3'
 end
