@@ -73,37 +73,37 @@ end
 # # Install project dependencies
 # bundle install
 # > should not be run as root. So another should be created
-directory '/home/robert' do
-  owner 'robert'
-  group 'robert'
-  mode '0755'
-  action :create
-end
-
-group 'robert' do
-  action :create
-end
-
-user 'robert' do
-  comment 'Robert User'
-  uid '1234'
-  home '/home/robert'
-  shell '/bin/bash'
-  password 'CorrectHorse_BatterySt@pl3'
-end
-
-bash 'give_robert_some_permissions' do
-  cwd ::File.dirname('/tmp')
-  code <<-EOH
-  chmod 777 -R /usr/local/lib/ruby/gems/2.1.0
-  chmod 777 -R /usr/local/bin
-  EOH
-end
+# directory '/home/robert' do
+#   owner 'robert'
+#   group 'robert'
+#   mode '0755'
+#   action :create
+# end
+#
+# group 'robert' do
+#   action :create
+# end
+#
+# user 'robert' do
+#   comment 'Robert User'
+#   uid '1234'
+#   home '/home/robert'
+#   shell '/bin/bash'
+#   password 'CorrectHorse_BatterySt@pl3'
+# end
+#
+# bash 'give_robert_some_permissions' do
+#   cwd ::File.dirname('/tmp')
+#   code <<-EOH
+#   chmod 777 -R /usr/local/lib/ruby/gems/2.1.0
+#   chmod 777 -R /usr/local/bin
+#   EOH
+# end
 
 # cd middleman-blog
 # gem install bundler
-bash 'install_bundler_as_robert_one_bash' do
-  user 'robert'
+bash 'install_bundler_as_ubuntu_one_bash' do
+  user 'ubuntu'
   cwd ::File.dirname('/tmp/middleman-blog')
   code <<-EOH
   gem install bundler
