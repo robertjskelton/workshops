@@ -84,27 +84,26 @@ end
 # bundle install
 # > should not be run as root. So another should be created
 # RJS: I think this meant another user should be created?
-directory '/home/robert' do
-  owner 'robert'
-  group 'robert'
-  mode '0755'
-  action :create
-end
+# directory '/home/robert' do
+#   owner 'robert'
+#   group 'robert'
+#   mode '0755'
+#   action :create
+# end
+#
+# group 'robert' do
+#   action :create
+# end
+#
+# user 'robert' do
+#   comment 'Robert User'
+#   uid '1234'
+#   home '/home/robert'
+#   shell '/bin/bash'
+#   password 'CorrectHorse_BatterySt@pl3'
+# end
 
-group 'robert' do
-  action :create
-end
-
-user 'robert' do
-  comment 'Robert User'
-  uid '1234'
-  home '/home/robert'
-  shell '/bin/bash'
-  password 'CorrectHorse_BatterySt@pl3'
-end
-
-bash 'bundle_install_as_robert' do
-  user 'robert'
+bash 'bundle_install_as_root' do
   cwd ::File.dirname('/tmp/middleman-blog')
   code <<-EOH
   bundle install
@@ -115,18 +114,16 @@ end
 # thin install
 # /usr/sbin/update-rc.d -f thin defaults
 bash 'thin_install' do
-  user 'robert'
-  cwd ::File.dirname('/tmp/middleman-blog')
+  cwd ::File.dirname('/tmp')
   code <<-EOH
   /usr/sbin/update-rc.d -f thin defaults
   EOH
 end
 
 # Create a new thin config for the blog and copy into /etc/thin
-cookbook_file '/etc/systemd/system/tomcat.service' do
-  source 'tomcat.service'
-  owner 'robert'
-  group 'robert'
+cookbook_file '/etc/thin' do
+  source 'blog.yml'
+
   mode '0755'
   action :create
 end
@@ -134,8 +131,6 @@ end
 # Fix the /etc/init.d/thin script to incude HOME variable
 cookbook_file '/etc/init.d/thin' do
   source 'thin'
-  owner 'robert'
-  group 'robert'
   mode '0755'
   action :create
 end
