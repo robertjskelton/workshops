@@ -49,21 +49,25 @@ package 'apache2'
 # # Configure apache
 # a2enmod proxy_http
 # a2enmod rewrite
-# cp blog.conf /etc/apache2/sites-enabled/blog.conf
-# rm /etc/apache2/sites-enabled/000-default.conf
 bash 'configure_apache' do
   cwd ::File.dirname('/tmp')
   code <<-EOH
   a2enmod proxy_http
   a2enmod rewrite
-  rm /etc/apache2/sites-enabled/000-default.conf
   EOH
 end
 
+# cp blog.conf /etc/apache2/sites-enabled/blog.conf
 cookbook_file '/etc/apache2/sites-enabled/blog.conf' do
   source 'blog.conf'
   mode '0755'
   action :create
+end
+
+# rm /etc/apache2/sites-enabled/000-default.conf
+
+file '/etc/apache2/sites-enabled/000-default.conf' do
+  action :delete
 end
 
 #
