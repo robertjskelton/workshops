@@ -38,10 +38,9 @@ bash 'configure_apache' do
 end
 
 # cp blog.conf /etc/apache2/sites-enabled/blog.conf
-cookbook_file '/etc/apache2/sites-enabled/blog.conf' do
+template '/etc/apache2/sites-enabled/blog.conf' do
   source 'blog.conf.erb'
   mode '0755'
-  action :create
 end
 
 # rm /etc/apache2/sites-enabled/000-default.conf
