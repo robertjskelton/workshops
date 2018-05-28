@@ -57,6 +57,7 @@ end
 # # Install Git
 package 'git'
 
+# doesn't seem to work as expected. 
 git '/tmp' do
   repository 'https://github.com/learnchef/middleman-blog.git'
   revision 'master'
@@ -95,6 +96,7 @@ end
 
 # # Start / Re-start the thin service
 # service thin restart
+# service does not start, maybe malformed conf file/home dir in service
 service 'thin' do
   user 'ubuntu'
   action [ :enable, :start ]
