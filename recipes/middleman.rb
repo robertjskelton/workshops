@@ -77,10 +77,21 @@ end
 # bundle install
 # > should not be run as root. So another should be created
 # RJS: I think this meant another user should be created?
+directory '/home/robert' do
+  owner 'robert'
+  group 'robert'
+  mode '0755'
+  action :create
+end
+
+group 'robert' do
+  action :create
+end
+
 user 'robert' do
   comment 'Robert User'
   uid '1234'
-  home '/tmp'
+  home '/home/robert'
   shell '/bin/bash'
   password 'CorrectHorse_BatterySt@pl3'
 end
