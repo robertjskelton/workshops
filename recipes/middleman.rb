@@ -57,12 +57,19 @@ end
 package 'git'
 
 # # Clone the repo
-bash 'git_clone' do
-  cwd ::File.dirname('/tmp')
-  code <<-EOH
-  git clone https://github.com/learnchef/middleman-blog.git
-  EOH
+# bash 'git_clone' do
+#   cwd ::File.dirname('/tmp')
+#   code <<-EOH
+#   git clone https://github.com/learnchef/middleman-blog.git
+#   EOH
+# end
+
+git '/tmp' do
+  repository 'https://github.com/learnchef/middleman-blog.git'
+  revision 'master'
+  action :checkout
 end
+
 # cd middleman-blog
 # gem install bundler
 bash 'install_bundler' do
