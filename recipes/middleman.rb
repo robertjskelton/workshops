@@ -3,7 +3,6 @@
 # Robert Skelton
 
 # ## Installation Commands
-# # Update apt-get
 # apt-get update
 apt_update
 
@@ -11,8 +10,6 @@ apt_update
 package %w(build-essential libssl-dev libyaml-dev libreadline-dev openssl curl git-core zlib1g-dev bison libxml2-dev libxslt1-dev libcurl4-openssl-dev nodejs libsqlite3-dev sqlite3)
 
 # # Build Ruby
-
-
 # mkdir ~/ruby
 # cd ~/ruby
 # wget http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.3.tar.gz
@@ -21,26 +18,29 @@ package %w(build-essential libssl-dev libyaml-dev libreadline-dev openssl curl g
 # ./configure
 # make install
 # rm -rf ~/ruby
-#
 # # Ruby may install to /usr/local/bin
 # # So you may need to make copies of the core commands into /usr/bin
 # # cp /usr/local/bin/ruby /usr/bin/ruby
 # # cp /usr/local/bin/gem /usr/bin/gem
-bash 'build_ruby' do
-  cwd ::File.dirname('/tmp')
-  code <<-EOH
-  mkdir ~/ruby
-  cd ~/ruby
-  wget http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.3.tar.gz
-  tar -xzf ruby-2.1.3.tar.gz
-  cd ruby-2.1.3
-  ./configure
-  make install
-  rm -rf ~/ruby
-  cp /usr/local/bin/ruby /usr/bin/ruby
-  cp /usr/local/bin/gem /usr/bin/gem
-  EOH
-end
+
+
+# bash 'build_ruby' do
+#   cwd ::File.dirname('/tmp')
+#   code <<-EOH
+#   mkdir ~/ruby
+#   cd ~/ruby
+#   wget http://cache.ruby-lang.org/pub/ruby/2.1/ruby-2.1.3.tar.gz
+#   tar -xzf ruby-2.1.3.tar.gz
+#   cd ruby-2.1.3
+#   ./configure
+#   make install
+#   rm -rf ~/ruby
+#   cp /usr/local/bin/ruby /usr/bin/ruby
+#   cp /usr/local/bin/gem /usr/bin/gem
+#   EOH
+# end
+
+
 
 # # Install apache
 # apt-get install apache2
@@ -56,9 +56,14 @@ bash 'configure_apache' do
   code <<-EOH
   a2enmod proxy_http
   a2enmod rewrite
-  cp blog.conf /etc/apache2/sites-enabled/blog.conf
   rm /etc/apache2/sites-enabled/000-default.conf
   EOH
+end
+
+cookbook_file '/etc/apache2/sites-enabled/blog.conf' do
+  source 'blog.conf'
+  mode '0755'
+  action :create
 end
 
 #
