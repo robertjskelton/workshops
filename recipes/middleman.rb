@@ -67,14 +67,12 @@ gem_package 'bundler'
 
 # Create a new thin config for the blog and copy into /etc/thin
 template '/etc/thin/blog.yml' do
-  user 'ubuntu'
   source 'blog.yml.erb'
   mode '0755'
 end
 
 # Fix the /etc/init.d/thin script to incude HOME variable
 template '/etc/init.d/thin' do
-  user 'ubuntu'
   source 'thin.erb'
   mode '0755'
 end
@@ -83,7 +81,6 @@ end
 # thin install
 # /usr/sbin/update-rc.d -f thin defaults
 bash 'thin_install' do
-  user 'ubuntu'
   cwd ::File.dirname('/tmp')
   code <<-EOH
   /usr/sbin/update-rc.d -f thin defaults
