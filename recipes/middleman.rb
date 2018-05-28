@@ -122,20 +122,16 @@ gem_package 'bundler'
 #   EOH
 # end
 
-
-
 # Create a new thin config for the blog and copy into /etc/thin
-cookbook_file '/etc/thin' do
-  source 'blog.yml'
+template '/etc/thin/blog.yml' do
+  source 'blog.yml.erb'
   mode '0755'
-  action :create
 end
 
 # Fix the /etc/init.d/thin script to incude HOME variable
-cookbook_file '/etc/init.d/thin' do
-  source 'thin'
+template '/etc/init.d/thin' do
+  source 'thin.erb'
   mode '0755'
-  action :create
 end
 
 # # Install thin service
