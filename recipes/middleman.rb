@@ -39,7 +39,7 @@ end
 
 # cp blog.conf /etc/apache2/sites-enabled/blog.conf
 cookbook_file '/etc/apache2/sites-enabled/blog.conf' do
-  source 'blog.conf'
+  source 'blog.conf.erb'
   mode '0755'
   action :create
 end
