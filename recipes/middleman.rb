@@ -81,7 +81,6 @@ end
 user 'robert' do
   comment 'Robert User'
   uid '1234'
-  gid '1234'
   home '/home/robert'
   shell '/bin/bash'
   password 'CorrectHorse_BatterySt@pl3'
