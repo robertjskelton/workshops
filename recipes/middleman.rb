@@ -122,20 +122,11 @@ gem_package 'bundler'
 #   EOH
 # end
 
-# # Install thin service
-# thin install
-# /usr/sbin/update-rc.d -f thin defaults
-bash 'thin_install' do
-  cwd ::File.dirname('/tmp')
-  code <<-EOH
-  /usr/sbin/update-rc.d -f thin defaults
-  EOH
-end
+
 
 # Create a new thin config for the blog and copy into /etc/thin
 cookbook_file '/etc/thin' do
   source 'blog.yml'
-
   mode '0755'
   action :create
 end
@@ -145,6 +136,16 @@ cookbook_file '/etc/init.d/thin' do
   source 'thin'
   mode '0755'
   action :create
+end
+
+# # Install thin service
+# thin install
+# /usr/sbin/update-rc.d -f thin defaults
+bash 'thin_install' do
+  cwd ::File.dirname('/tmp')
+  code <<-EOH
+  /usr/sbin/update-rc.d -f thin defaults
+  EOH
 end
 
 # # Start / Re-start the thin service
