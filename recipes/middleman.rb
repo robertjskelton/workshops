@@ -65,6 +65,12 @@ end
 
 gem_package 'bundler'
 
+#create /etc/thin directory
+directory '/etc/thin' do
+  mode '0777'
+  action :create
+end
+
 # Create a new thin config for the blog and copy into /etc/thin
 template '/etc/thin/blog.yml' do
   source 'blog.yml.erb'
