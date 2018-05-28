@@ -102,21 +102,22 @@ end
 
 # cd middleman-blog
 # gem install bundler
-bash 'install_bundler' do
+bash 'install_bundler_as_robert_one_bash' do
   user 'robert'
   cwd ::File.dirname('/tmp/middleman-blog')
   code <<-EOH
   gem install bundler
-  EOH
-end
-
-bash 'bundle_install_as_robert' do
-  user 'robert'
-  cwd ::File.dirname('/tmp/middleman-blog')
-  code <<-EOH
   bundle install
   EOH
 end
+#
+# bash 'bundle_install_as_robert' do
+#   user 'robert'
+#   cwd ::File.dirname('/tmp/middleman-blog')
+#   code <<-EOH
+#   bundle install
+#   EOH
+# end
 
 # # Install thin service
 # thin install
