@@ -74,7 +74,7 @@ end
 # # Restart apache
 #
 # service apache2 restart
-service 'apache' do
+service 'apache2' do
   action [ :enable, :start ]
 end
 
@@ -128,7 +128,6 @@ end
 # # Install thin service
 # thin install
 # /usr/sbin/update-rc.d -f thin defaults
-
 bash 'thin_install' do
   user 'robert'
   cwd ::File.dirname('/tmp/middleman-blog')
